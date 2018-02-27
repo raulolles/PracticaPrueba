@@ -26,7 +26,8 @@ public class Ball {
 		fi =  Math.random() * Math.PI * 2;
 	}
 
-	public void move() {
+	// ¿¿¿Debe ser synchronized???
+		public void move() {
 		v = v*Math.exp(-v/1000);
 		dx = v*Math.cos(fi);
 		dy = v*Math.sin(fi);
@@ -40,8 +41,15 @@ public class Ball {
 		reflect();
 		
 		//TODO Check postcondition
+		//HECHO --- REVISAR ---
+		
+		assert x < Board.RIGHTBOARD;
+		assert x > Board.LEFTBOARD;
+		assert y < Board.TOPBOARD;
+		assert y > Board.BOTTOMBOARD;
 	}
 
+	// ¿¿¿Debe ser synchronized???
 	private void reflect() {
 		if (Math.abs(x + IMG_TAM_X - Board.RIGHTBOARD) <  Math.abs(dx)) {
 			fi = Math.PI - fi;

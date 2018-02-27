@@ -55,12 +55,20 @@ public class Billiards extends JFrame {
 
 	private void initBalls() {
 		// TODO init balls
+		// HECHO --PARA REVISAR --
+		
+		balls = new Ball[N_BALL];
+		for (int i=0; i< N_BALL; i++){
+			balls[i] = new Ball();
+		}
 	}
 
 	private class StartListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
+			// ¿Es necesario que StartListener sea synchronized?
+			
 
 		}
 	}
@@ -73,6 +81,34 @@ public class Billiards extends JFrame {
 		}
 	}
 
+	// Fuera del inicial
+	// Hilos
+	private class Hilo implements Runnable{
+		private Ball miBola;
+		
+		public Hilo (Ball bola){
+			miBola = bola;
+		}
+		
+		@Override
+		public void run(){
+			boolean continua = true;
+			try{
+				while (continua) {
+					miBola.move();
+					board.setBalls(balls);
+					board.repaint();
+					Thread.sleep(500);
+				}
+			} catch (InterruptedException e){
+				continua = false;
+				System.out.println("ERROR");
+			}
+		}
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		new Billiards();
 	}
