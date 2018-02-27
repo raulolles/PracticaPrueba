@@ -23,6 +23,9 @@ public class Billiards extends JFrame {
 	private final int N_BALL = 6;
 	private Ball[] balls;
 
+	// Incluido
+	private Thread[] hilos;
+	
 	public Billiards() {
 
 		board = new Board();
@@ -68,8 +71,14 @@ public class Billiards extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
 			// ¿Es necesario que StartListener sea synchronized?
+			// HECHO --- para revisar ---
 			
-
+			board.setBalls(balls);
+			hilos = new Thread[N_BALL];
+			for(int i=0; i<N_BALL; i++){
+				hilos[i] = new Thread(new Hilo(balls[i]));
+				hilos[i].start();
+			}
 		}
 	}
 
@@ -77,7 +86,11 @@ public class Billiards extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when stop button is pushed
-
+			// HECHO --- para revisar ---
+			
+			for (int i=0; i<N_BALL; i++){
+				hilos[i].interrupt();
+			}
 		}
 	}
 
@@ -98,11 +111,11 @@ public class Billiards extends JFrame {
 					miBola.move();
 					board.setBalls(balls);
 					board.repaint();
-					Thread.sleep(500);
+					Thread.sleep(30);
 				}
 			} catch (InterruptedException e){
 				continua = false;
-				System.out.println("ERROR");
+				return;
 			}
 		}
 	}
