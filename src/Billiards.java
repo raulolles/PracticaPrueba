@@ -71,6 +71,8 @@ public class Billiards extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
 			// ¿Es necesario que StartListener sea synchronized?
+			// He hecho la prueba y no hay diferencia
+			// 		Prueba de iniciar varias veces los hilos ¿¿??
 			// HECHO --- para revisar ---
 			
 			board.setBalls(balls);
@@ -110,7 +112,10 @@ public class Billiards extends JFrame {
 				while (continua) {
 					miBola.move();
 					board.setBalls(balls);
-					board.repaint();
+					// funciona con reparint() y updateUI() de JPanel
+					// refresca el panel para apreciar el movimiento
+					//board.repaint();
+					board.updateUI();
 					Thread.sleep(30);
 				}
 			} catch (InterruptedException e){
