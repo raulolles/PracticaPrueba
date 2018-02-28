@@ -25,6 +25,7 @@ public class Billiards extends JFrame {
 
 	// Incluido
 	private Thread[] hilos;
+	private Boolean isRunning = false;
 	
 	public Billiards() {
 
@@ -75,11 +76,14 @@ public class Billiards extends JFrame {
 			// 		Prueba de iniciar varias veces los hilos ¿¿??
 			// HECHO --- para revisar ---
 			
-			board.setBalls(balls);
-			hilos = new Thread[N_BALL];
-			for(int i=0; i<N_BALL; i++){
-				hilos[i] = new Thread(new Hilo(balls[i]));
-				hilos[i].start();
+			if (!isRunning){
+				board.setBalls(balls);
+				hilos = new Thread[N_BALL];
+				for(int i=0; i<N_BALL; i++){
+					hilos[i] = new Thread(new Hilo(balls[i]));
+					hilos[i].start();
+				}
+				isRunning = true;
 			}
 		}
 	}
@@ -93,6 +97,7 @@ public class Billiards extends JFrame {
 			for (int i=0; i<N_BALL; i++){
 				hilos[i].interrupt();
 			}
+			isRunning = false;
 		}
 	}
 
