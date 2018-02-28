@@ -27,7 +27,7 @@ public class Ball {
 	}
 
 	// ¿¿¿Debe ser synchronized???
-	public void move() {
+	public synchronized void move() {
 		v = v*Math.exp(-v/1000);
 		dx = v*Math.cos(fi);
 		dy = v*Math.sin(fi);
@@ -43,14 +43,14 @@ public class Ball {
 		//TODO Check postcondition
 		//HECHO --- REVISAR ---
 		
-		assert x < Board.RIGHTBOARD;
-		assert x > Board.LEFTBOARD;
-		assert y < Board.TOPBOARD;
-		assert y > Board.BOTTOMBOARD;
+		assert x < Board.RIGHTBOARD: String.format("Posición[x: (%f)] fuera del tablero por la derecha", x);
+		assert x > Board.LEFTBOARD: String.format("Posición[x: (%f)] fuera del tablero por la izquierda", x);
+		assert y > Board.TOPBOARD: String.format("Posición[y: (%f)] fuera del tablero por  arriba", y);
+		assert y < Board.BOTTOMBOARD: String.format("Posición[y: (%f)] fuera del tablero por  abajo", y);
 	}
 
 	// ¿¿¿Debe ser synchronized???
-	private void reflect() {
+	private synchronized void reflect() {
 		if (Math.abs(x + IMG_TAM_X - Board.RIGHTBOARD) <  Math.abs(dx)) {
 			fi = Math.PI - fi;
 		}

@@ -24,7 +24,7 @@ public class Billiards extends JFrame {
 	private Ball[] balls;
 
 	// Incluido
-	private Thread[] hilos;
+	protected Thread[] hilos;
 	private Boolean isRunning = false;
 	
 	public Billiards() {
@@ -105,7 +105,7 @@ public class Billiards extends JFrame {
 
 	// Fuera del inicial
 	// Hilos
-	private class Hilo implements Runnable{
+	protected class Hilo implements Runnable{
 		private Ball miBola;
 		
 		public Hilo (Ball bola){
@@ -121,12 +121,12 @@ public class Billiards extends JFrame {
 					board.setBalls(balls);
 					// funciona con reparint() y updateUI() de JPanel
 					// refresca el panel para apreciar el movimiento
-					//board.repaint();
-					board.updateUI();
+					board.repaint();
+					//board.updateUI();
 					Thread.sleep(30);
 				}
 			} catch (InterruptedException e){
-				continua = false;
+				continua = false; // no sería necesario porque saldrá con return
 				return;
 			}
 		}
