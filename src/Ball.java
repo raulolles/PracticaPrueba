@@ -26,8 +26,8 @@ public class Ball {
 		fi =  Math.random() * Math.PI * 2;
 	}
 
-	// ¿¿¿Debe ser synchronized???
-	public synchronized void move() {
+	// No es necesario que sea synchronized
+	public void move() {
 		v = v*Math.exp(-v/1000);
 		dx = v*Math.cos(fi);
 		dy = v*Math.sin(fi);
