@@ -94,10 +94,12 @@ public class Billiards extends JFrame {
 			// TODO Code is executed when stop button is pushed
 			// HECHO --- para revisar ---
 			
-			for (int i=0; i<N_BALL; i++){
-				hilos[i].interrupt();
+			if (isRunning) {
+				for (int i=0; i<N_BALL; i++){
+					hilos[i].interrupt();
+				}
+				isRunning = false;	
 			}
-			isRunning = false;
 		}
 	}
 

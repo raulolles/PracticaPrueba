@@ -27,7 +27,7 @@ public class Ball {
 	}
 
 	// ¿¿¿Debe ser synchronized???
-		public void move() {
+	public void move() {
 		v = v*Math.exp(-v/1000);
 		dx = v*Math.cos(fi);
 		dy = v*Math.sin(fi);
